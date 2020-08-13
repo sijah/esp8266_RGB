@@ -9,7 +9,7 @@ uint8_t led1 = D1;
 uint8_t led2 = D2;
 uint8_t led3 = D3;
 
-const char *ssid="CABIN1";//CABIN1 //o2
+const char *ssid="o2";//CABIN1 //o2
 const char *pass="asdfghjkl";//asdfghjkl
 
 void handle_root() {

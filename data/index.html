@@ -46,7 +46,7 @@
 </head>
 
 <body>
-    <h1>RGB CONTROLLER</h1>
+    <h1>RGB color chooser</h1>
     <div class="slidecontainer">
         <h2>RED</h2>
         <input type="range" min="0" max="100" class="slider" id="r">
@@ -54,49 +54,62 @@
     </div>
     <div class="slidecontainer">
         <h2>BLUE</h2>
-        <input type="range" min="0" max="100" class="slider" id="b" >
+        <input type="range" min="0" max="100" class="slider" id="b">
         <p>Value: <span id="demob"></span></p>
     </div>
     <div class="slidecontainer">
         <h2>GREEN</h2>
-        <input type="range" min="0" max="100" class="slider" id="g" >
+        <input type="range" min="0" max="100" class="slider" id="g">
         <p>Value: <span id="demog"></span></p>
     </div>
 
     <script>
- var sliderr = document.getElementById("r");
-var outputr = document.getElementById("demor");
-outputr.innerHTML = sliderr.value;
-var slideg =document.getElementById("g");
-var outputg = document.getElementById("demog");
-outputg.innerHTML=slideg.value;
-var slideb =document.getElementById("b");
-var outputb = document.getElementById("demob");
-outputb.innerHTML=slideb.value;
+        var sliderr = document.getElementById("r");
+        var outputr = document.getElementById("demor");
+        outputr.innerHTML = sliderr.value;
+        var slideg = document.getElementById("g");
+        var outputg = document.getElementById("demog");
+        outputg.innerHTML = slideg.value;
+        var slideb = document.getElementById("b");
+        var outputb = document.getElementById("demob");
+        outputb.innerHTML = slideb.value;
 
-sliderr.oninput = function() {
-  outputr.innerHTML = this.value;
-  var xhttp= new XMLHttpRequest();
+        sliderr.onchange = function () {
+            //outputr.innerHTML = this.value;
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("demor").innerHTML = this.responseText;
+                }
+            };
 
-  xhttp.open("GET", "RGB?r=" +sliderr.value+"g="+slideg.value+"b="+slideb.value, true);
+            xhttp.open("GET", "RGB?r=" + sliderr.value + "&g=" + slideg.value + "&b=" + slideb.value, true);
             xhttp.send();
-}
+        }
 
-slideg.oninput = function() {
-  outputg.innerHTML = this.value;
-  var xhttp= new XMLHttpRequest();
-
-  xhttp.open("GET", "RGB?r=" +sliderr.value+"g="+slideg.value+"b="+slideb.value, true);
+        slideg.onchange = function () {
+            //outputg.innerHTML = this.value;
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("demog").innerHTML = slideg.value;
+                }
+            };
+            xhttp.open("GET", "RGB?r=" + sliderr.value + "&g=" + slideg.value + "&b=" + slideb.value, true);
             xhttp.send();
-}
+        }
 
-slideb.oninput = function() {
-  outputb.innerHTML = this.value;
-  var xhttp= new XMLHttpRequest();
-
-  xhttp.open("GET", "RGB?r=" +sliderr.value+"g="+slideg.value+"b="+slideb.value, true);
+        slideb.onchange = function () {
+            //outputb.innerHTML = this.value;
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("demob").innerHTML = slideb.value;
+                }
+            };
+            xhttp.open("GET", "RGB?r=" + sliderr.value + "&g=" + slideg.value + "&b=" + slideb.value, true);
             xhttp.send();
-}
+        }
 
 
 
