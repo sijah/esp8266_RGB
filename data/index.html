@@ -42,6 +42,18 @@
             background: #4CAF50;
             cursor: pointer;
         }
+
+        .button {
+            display: inline-block;
+            background-color: #008CBA;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            padding: 16px 40px;
+            text-decoration: none;
+            font-size: 30px;
+            margin: 2px;
+            cursor: pointer;
     </style>
 </head>
 
@@ -61,6 +73,14 @@
         <h2>GREEN</h2>
         <input type="range" min="0" max="100" class="slider" id="g">
         <p>Value: <span id="demog"></span></p>
+    </div>
+
+    <div id="swi">
+        <h3> color change</h>
+            <button type="button" class="button" onclick="senddata()">colorchange</button>
+            <p id="switch"></p>
+
+
     </div>
 
     <script>
@@ -111,7 +131,17 @@
             xhttp.send();
         }
 
+        function senddata() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("switch").innerHTML = "";
+                }
 
+            };
+            xhttp.open("GET", "colorchange", true);
+            xhttp.send();
+        }
 
 
 
