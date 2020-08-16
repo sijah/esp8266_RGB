@@ -9,7 +9,7 @@ uint8_t led1 = D1; //RED
 uint8_t led2 = D2; //GREEN
 uint8_t led3 = D3; //BLUE
 
-const char *ssid = "CABIN1";    //CABIN1 //o2
+const char *ssid = "o2";    //CABIN1 //o2
 const char *pass = "asdfghjkl"; //asdfghjkl
 
 void handle_root()
@@ -39,17 +39,17 @@ void handle_rgb()
     Serial.print("Blue:");
     Serial.println(b);
 
-    server.send(200, "text/plane", red);
+    server.send(302, "text/plane", "ok");
 
-    int r1 = map(r, 0, 100, 0, 1024);
-    int g1 = map(g, 0, 100, 0, 1024);
-    int b1 = map(b, 0, 100, 0, 1024);
+    int r1 = map(r, 0, 255, 0, 1024);
+    int g1 = map(g, 0, 255, 0, 1024);
+    int b1 = map(b, 0, 255, 0, 1024);
     analogWrite(led1, r1);
     analogWrite(led2, g1);
     analogWrite(led3, b1);
 }
 
-void setColor(int red, int green, int blue)
+/*void setColor(int red, int green, int blue)
 {
     analogWrite(led1, red);
     analogWrite(led2, green);
@@ -71,7 +71,7 @@ void color_change()
         delay(1000);
     
     server.send(200, "text/html", "ok");
-}
+}*/
 
 void setup()
 {
@@ -105,7 +105,7 @@ void setup()
     }
     server.on("/", handle_root);
     server.on("/RGB", handle_rgb);
-    server.on("/colorchange", color_change);
+    //server.on("/colorchange", color_change);
     server.onNotFound(handle_notfound);
     server.begin();
 }
